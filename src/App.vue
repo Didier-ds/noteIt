@@ -13,20 +13,33 @@
 
 <script>
 // import HelloWorld from './components/HelloWorld.vue'
-import {db, ref, set} from '@/utils/firebase.js'
+import {db, ref, set, onValue} from '@/utils/firebase.js'
 export default {
   name: 'App',
   data(){
     return {
-      note: ''
+      note: '',
+    }
+  },
+  computed: {
+    noteRef(){
+      const userId = 0
+     return ref(db, `/users/${userId}`)
     }
   },
   methods:{
     save(){
-      const userId = 0
+      
       console.log(this.note)
-     set(ref(db, `/users/${userId}`),{
+     set(this.noteRef,{
         note : this.note
+      })
+    },
+    listen(){
+      onValue(this.noteRef, (snapshot) => {
+        const data = snapshot.val();
+        console.log('user', data)
+         this.note = data.note;
       })
     }
   },
@@ -34,6 +47,7 @@ export default {
     // HelloWorld
   },
   mounted() {
+    this.listen();
     console.log(ref)
   },
 }
