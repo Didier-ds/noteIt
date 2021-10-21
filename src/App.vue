@@ -73,7 +73,7 @@ export default {
   margin-top: 2em;
   min-height: 70vh;
   resize: none;
-  color:rgb(130, 170, 255) !important;
+  color: white ;//rgb(130, 170, 255) !important;
   border: none;
   outline: none;
 }
