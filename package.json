@@ -23,6 +23,8 @@
         "@vue/cli-service": "~4.5.0",
         "@vue/compiler-sfc": "^3.0.0",
         "@vue/test-utils": "^2.0.0-0",
+        "@quasar/extras": "^1.12.2",
+        "quasar": "^2.3.4",
         "autoprefixer": "^9",
         "babel-eslint": "^10.1.0",
         "eslint": "^6.7.2",
