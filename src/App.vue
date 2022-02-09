@@ -31,17 +31,31 @@ const noteRef = computed(() => {
       const userId = 0
      return all.ref(all.db, `/users/${userId}`)
     })
-const copy = () => {
+const copy = async () => {
    isCopy.value = true;
-   navigator.clipboard.writeText(note);
-   $q.notify({
+   await window.navigator.clipboard.writeText(note.value).then(() => {
+     $q.notify({
         message: 'Copied!!!!.',
         color: 'primary',
-        avatar: 'https://cdn.quasar.dev/img/boy-avatar.png',
+        
         actions: [
           { label: 'Dismiss', color: 'white', handler: () => { /* ... */ } },
         ],
-      });
+      })
+      setTimeout(() => {
+        isCopy.value = false;
+      }, 2000);
+   }).catch(() => {
+     $q.notify({
+        message: 'something went wrong!!!!.',
+        
+        type: 'negative',
+        actions: [
+          { label: 'Dismiss', color: 'white', handler: () => { /* ... */ } },
+        ],
+      })
+   })
+   
       setTimeout(() => {
         isCopy.value = false;
       }, 2000);
@@ -116,7 +130,7 @@ onMounted(() => {
 </script>
 
 <style lang="scss">
-@import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@100,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@100;400&display=swap');
 @import 'assets/styles/main.css';
 * {
   font-family: 'Work Sans', sans-serif;
@@ -130,7 +144,7 @@ onMounted(() => {
 }
 #code_box {
   height: 80vh;
-  background-color:rgb(1, 22, 39) !important;
+  background-color:rgb(1, 12, 21) !important;
   box-shadow: rgb(0 0 0 / 55%) 0px 20px 68px;
 }
 .copy-btn {
@@ -141,11 +155,11 @@ onMounted(() => {
   }
 #code_box textarea {
   background: transparent;
-  color: white;
+  // color: white;
   margin-top: 2em;
   min-height: 70vh;
   resize: none;
-  color: white ;//rgb(130, 170, 255) !important;
+  color: white;//lightslategray ;//rgb(130, 170, 255) !important;
   border: none;
   outline: none;
 }

@@ -8,7 +8,7 @@ import { Notify } from 'quasar'
 export default {
     config: {
         brand: {
-            primary: '#f97316' //'#DE3618',
+           // primary: '#636668' //'#DE3618',
                 // ... or all other brand colors
         },
         notify: { /* look at QuasarConfOptions from the API card */ }
